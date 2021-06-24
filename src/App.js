@@ -62,8 +62,22 @@ export default class App extends Component {
             "Basically the same as the original, except now Hermi-- Emma Wattson plays Belle, fittingly so some would say, given how actively progressive she is regarding women's rights. Rumor has it that in the bonus scenes she whips out a wand and turns Gaston into a toad, but in order to watch those scenes you need to recite a certain incantation.",
         },
       ],
+      rentedMovies: [],
     };
   }
+  addRentedMovie = (item) => {
+    item.isRented = true;
+    this.setState({ rentedMovies: [...this.state.rentedMovies, item] });
+  };
+  removeRentedMovie = (item) => {
+    item.isRented = false;
+    let rentedMovies = [...this.state.rentedMovies]; // make a separate copy of the array
+    let index = rentedMovies.indexOf(item);
+    if (index !== -1) {
+      rentedMovies.splice(index, 1);
+      this.setState({ rentedMovies: rentedMovies });
+    }
+  };
   render() {
     const state = this.state;
     return (
@@ -79,7 +93,14 @@ export default class App extends Component {
           <Route
             path="/catalog"
             exact
-            render={({ match }) => <Catalog match={match} state={state} />}
+            render={({ match }) => (
+              <Catalog
+                match={match}
+                state={state}
+                addRentedMovie={this.addRentedMovie}
+                removeRentedMovie={this.removeRentedMovie}
+              />
+            )}
           />
           <Route
             path="/"

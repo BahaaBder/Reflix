@@ -2,7 +2,10 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.App {
+  background-color: #131921;
+  color: white;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -46,6 +49,7 @@ img {
 }
 .catalog-item {
   margin: 2px;
+  display: inline-block;
 }
 .movie-info {
   text-align: center;
@@ -61,4 +65,10 @@ img {
 .Budget {
   position: absolute;
   right: 0;
+}
+
+button {
+  border-radius: 50%;
+  background-color: #090a74;
+  color: white;
 }
