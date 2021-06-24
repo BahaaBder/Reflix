@@ -6,8 +6,18 @@ export default class Catalog extends Component {
   constructor() {
     super();
   }
+  updateTextInput = (event) => {
+    this.props.updateTextInput(event);
+  };
   render() {
     let catalog = this.props.state.movies;
+    if (this.props.state.textInput.length > 0) {
+      catalog = this.props.state.movies.filter((m) =>
+        m.title.toLowerCase().includes(this.props.state.textInput.toLowerCase())
+      );
+    } else {
+      catalog = this.props.state.movies;
+    }
     let rented;
     if (this.props.state.rentedMovies.length >= 0) {
       rented = (
@@ -32,8 +42,13 @@ export default class Catalog extends Component {
     }
     return (
       <div>
-        <input type="text" placeholder="Search..." />
-        <span className="Budget">Budget: 200 $</span>
+        <span className="Budget">Budget: {this.props.state.Budget} $</span>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={this.props.textInput}
+          onChange={this.updateTextInput}
+        />
         {rented}
         <div className="catalog-movies">
           <div>Catalog:</div>

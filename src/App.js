@@ -63,13 +63,20 @@ export default class App extends Component {
         },
       ],
       rentedMovies: [],
+      textInput: "",
+      Budget: 200,
     };
   }
+  updateTextInput = (event) => {
+    this.setState({ textInput: event.target.value });
+  };
   addRentedMovie = (item) => {
+    this.setState({ Budget: this.state.Budget - 3 });
     item.isRented = true;
     this.setState({ rentedMovies: [...this.state.rentedMovies, item] });
   };
   removeRentedMovie = (item) => {
+    this.setState({ Budget: this.state.Budget + 3 });
     item.isRented = false;
     let rentedMovies = [...this.state.rentedMovies]; // make a separate copy of the array
     let index = rentedMovies.indexOf(item);
@@ -80,13 +87,18 @@ export default class App extends Component {
   };
   render() {
     const state = this.state;
+
     return (
       <Router>
         <div className="App">
           <div className="header">
             <span id="main-links">
-              <Link to="/">Home </Link>
-              <Link to="/catalog">Catalog</Link>
+              <Link to="/" className="headerItem">
+                <span>Home</span>{" "}
+              </Link>
+              <Link to="/catalog" className="headerItem">
+                <span>Catalog</span>
+              </Link>
             </span>
             <span className="logo">REFLIX</span>
           </div>
@@ -99,6 +111,7 @@ export default class App extends Component {
                 state={state}
                 addRentedMovie={this.addRentedMovie}
                 removeRentedMovie={this.removeRentedMovie}
+                updateTextInput={this.updateTextInput}
               />
             )}
           />

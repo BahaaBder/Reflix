@@ -72,3 +72,7 @@ button {
   background-color: #090a74;
   color: white;
 }
+.headerItem {
+  text-decoration: none;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
